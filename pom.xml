@@ -13,14 +13,8 @@
         <module>chatroom-service-war</module>
     </modules>
     <properties>
-        <!-- Persistence context configuration -->
-        <db.driver>org.postgresql.Driver</db.driver>
-        <db.url>jdbc:postgresql://localhost:5432/chatroom</db.url>
-        <db.username>postgres</db.username>
-        <db.password>admin</db.password>
-        <hibernate.dialect>org.hibernate.dialect.PostgreSQL9Dialect</hibernate.dialect>
-        <hibernate.showsql>true</hibernate.showsql>
-        <hibernate.hbm2ddl.auto>create</hibernate.hbm2ddl.auto>
+        <!-- Default Property file configuration -->
+        <properties.file.location>classpath:properties/development.properties</properties.file.location>
         <!--  -->
         <java.version>1.7</java.version>
         <javax.validation-api.version>1.0.0.GA</javax.validation-api.version>
