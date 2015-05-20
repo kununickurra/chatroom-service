@@ -14,7 +14,7 @@ import com.cgi.service.chatroom.response.dto.v1.ChatroomSecurityExceptionDTO;
 import com.cgi.service.chatroom.response.dto.v1.ChatroomSecurityExceptionEnumType;
 import com.cgi.service.chatroom.response.dto.v1.GetMessagesFromDateResponseDTO;
 import com.cgi.service.chatroom.response.dto.v1.GetMessagesReceivedAfterThisIDResponseDTO;
-import com.cgi.service.chatroom.response.dto.v1.PulishResponseDTO;
+import com.cgi.service.chatroom.response.dto.v1.PublishResponseDTO;
 import com.cgi.service.chatroom.type.v1.MessageType;
 import com.cgi.service.chatroom.v1.ChatroomService;
 import com.cgi.service.chatroom.v1.PublishFault;
@@ -60,7 +60,7 @@ public class ChatroomServiceImpl implements ChatroomService {
     }
 
     @Override
-    public PulishResponseDTO publish(
+    public PublishResponseDTO publish(
             @WebParam(partName = "parameters", name = "publishRequest", targetNamespace = "http://services.cgi.com/chatroom/request/v1/") PublishRequestDTO publishRequestDTO,
             @WebParam(partName = "header", name = "header", targetNamespace = "http://services.cgi.com/chatroom/request/v1/", header = true) HeaderDTO headerDTO) throws
             PublishFault {
@@ -79,7 +79,7 @@ public class ChatroomServiceImpl implements ChatroomService {
                         dateUtils.getSystemTime());
 
         chatroomDao.saveOrUpdate(newToPublish);
-        return new PulishResponseDTO(messageConverter.toChatRoomMessageType(newToPublish));
+        return new PublishResponseDTO(messageConverter.toChatRoomMessageType(newToPublish));
     }
 
     @Override

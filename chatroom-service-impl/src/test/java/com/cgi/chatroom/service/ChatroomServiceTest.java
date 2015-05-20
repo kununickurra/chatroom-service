@@ -6,7 +6,7 @@ import com.cgi.service.chatroom.request.dto.v1.HeaderDTO;
 import com.cgi.service.chatroom.request.dto.v1.PublishRequestDTO;
 import com.cgi.service.chatroom.response.dto.v1.GetMessagesFromDateResponseDTO;
 import com.cgi.service.chatroom.response.dto.v1.GetMessagesReceivedAfterThisIDResponseDTO;
-import com.cgi.service.chatroom.response.dto.v1.PulishResponseDTO;
+import com.cgi.service.chatroom.response.dto.v1.PublishResponseDTO;
 import com.cgi.service.chatroom.type.v1.MessageOriginType;
 import com.cgi.service.chatroom.type.v1.MessageType;
 import com.cgi.service.chatroom.v1.PublishFault;
@@ -167,7 +167,7 @@ public class ChatroomServiceTest {
         publishRequestDTO.setSender(sender);
 
         //When
-        PulishResponseDTO responseDTO = chatroomServiceImpl.publish(publishRequestDTO, headerDTO);
+        PublishResponseDTO responseDTO = chatroomServiceImpl.publish(publishRequestDTO, headerDTO);
         verify(chatroomDao, times(1)).saveOrUpdate(m1);
 
         // Then
