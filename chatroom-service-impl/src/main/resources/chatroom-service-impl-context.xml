@@ -12,28 +12,18 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations" value="${properties.file.location}"/>
-    </bean>
+    <!-- Import persistence spring context -->
+    <import resource="classpath:chatroom-persistence-context.xml"/>
 
     <!-- Scan my packages -->
-    <context:component-scan base-package="com.cgi.chatroom"/>
+    <context:component-scan base-package="com.cgi.chatroom.service"/>
 
-    <!-- data source configuration -->
-    <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${db.driver}"/>
-        <property name="url" value="${db.url}"/>
-        <property name="username" value="${db.username}"/>
-        <property name="password" value="${db.password}"/>
-    </bean>
-
-    <!-- Transaction context set using AOP advices -->
+    <!-- Transaction context set on the service classes using AOP advices -->
     <aop:config>
         <aop:pointcut id="serviceMethods" expression="execution(* com.cgi.chatroom.service.*.*(..))"/>
         <aop:advisor advice-ref="transactionAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
-        <!-- the transactional semantics... -->
         <tx:attributes>
             <!-- all methods starting with 'get' are read-only -->
             <tx:method name="get*" read-only="true"/>
@@ -41,21 +31,5 @@
             <tx:method name="*"/>
         </tx:attributes>
     </tx:advice>
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-
-    <!-- Spring Hibernate session factory -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.cgi.chatroom.domain"/>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-                <prop key="hibernate.show_sql">${hibernate.showsql}</prop>
-                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-            </props>
-        </property>
-    </bean>
 
 </beans>

@@ -16,11 +16,6 @@
             <artifactId>chatroom-service-impl</artifactId>
         </dependency>
         <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http-jetty</artifactId>
             <scope>runtime</scope>
@@ -33,16 +28,25 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
     <build>
         <finalName>chatroom-service</finalName>
-        <!-- Simple Jetty plugin to test the app, run mvn jetty:run from command line -->
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
@@ -59,5 +63,45 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
     </build>
+    <profiles>
+        <!-- Local deployment profiles -->
+        <profile>
+            <id>local-mysql</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <properties.file.location>classpath:properties/development.mysql.properties</properties.file.location>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>${mysql.version}</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>local-postgres</id>
+            <properties>
+                <properties.file.location>classpath:properties/development.postgres.properties
+                </properties.file.location>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>

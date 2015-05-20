@@ -10,8 +10,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * Converter used to generate a {@link javax.xml.datatype.XMLGregorianCalendar} from a given
- * Date.
+ * Converter used to convert a {@link XMLGregorianCalendar} to/from {@link Date}
  */
 
 @Component
@@ -19,10 +18,9 @@ public class DateConverter {
 
     /**
      * Converts the @link{Date} received to a @link{XMLGregorianCalendar}
-     * TimeZone and Time (HH:MM:SS:MMs) information should not be present in the generated calendar
      *
      * @param date the input date to convert
-     * @return The XMLGregorian Calendar with only the Date information (YYYYmmDD)
+     * @return The XMLGregorian Calendar (YYYYmmDD hh:mm:ss:mmm)
      */
     public XMLGregorianCalendar toXMLGregorianCalendar(Date date) {
         if (date == null) {
@@ -45,4 +43,13 @@ public class DateConverter {
         }
     }
 
+    /**
+     * Converts the @link{XMLGregorianCalendar} received to a @link{Date}
+     *
+     * @param xmlGregorianCalendar the input date to convert
+     * @return The converted date
+     */
+    public Date toDate(XMLGregorianCalendar xmlGregorianCalendar) {
+        return xmlGregorianCalendar.toGregorianCalendar().getTime();
+    }
 }

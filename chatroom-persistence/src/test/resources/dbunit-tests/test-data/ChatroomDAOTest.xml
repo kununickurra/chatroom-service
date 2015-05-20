@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <message id="1" creation_date="2015-04-30 04:00:00.047" send_date = "2022-04-29 02:00:00.012" sender_id = "1" sender_nick="nickName" sender_user_agent= "1" />
+    <message id="2" creation_date="2015-04-30 04:00:00.045" send_date = "2022-04-29 02:00:00.012" sender_id = "1" sender_nick="nickName" sender_user_agent= "1" />
+    <message id="3" creation_date="2015-04-30 04:00:00.046" send_date = "2022-04-29 02:00:00.012" sender_id = "1" sender_nick="nickName" sender_user_agent= "1" />
+    <message id="4" creation_date="2015-04-29 02:00:00.022" send_date = "2022-04-29 02:00:00.012" sender_id = "1" sender_nick="nickName" sender_user_agent= "1" />
+</dataset>
